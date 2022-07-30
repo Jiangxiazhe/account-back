@@ -1,4 +1,4 @@
-package com.longjiang.jiangxia.demo1.config;
+package com.longjiang.jiangxia.demo1.enumset;
 
 /**
  * @author gain

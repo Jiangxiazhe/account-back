@@ -1,4 +1,4 @@
-package com.longjiang.jiangxia.demo1;
+package com.longjiang.jiangxia.demo1.daoentity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

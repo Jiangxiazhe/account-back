@@ -1,7 +1,7 @@
 package com.longjiang.jiangxia.demo1.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.longjiang.jiangxia.demo1.Person;
+import com.longjiang.jiangxia.demo1.daoentity.Person;
 import com.longjiang.jiangxia.demo1.service.PersonService;
 import com.longjiang.jiangxia.demo1.mapper.PersonMapper;
 import org.springframework.stereotype.Service;

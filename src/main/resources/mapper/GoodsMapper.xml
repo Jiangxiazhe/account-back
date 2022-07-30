@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.longjiang.jiangxia.demo1.mapper.GoodsMapper">
 
-    <resultMap id="BaseResultMap" type="com.longjiang.jiangxia.demo1.Goods">
+    <resultMap id="BaseResultMap" type="com.longjiang.jiangxia.demo1.daoentity.Goods">
             <result property="id" column="id" jdbcType="INTEGER"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="unitType" column="unit_type" jdbcType="INTEGER"/>

@@ -1,9 +1,7 @@
-package com.longjiang.jiangxia.demo1;
+package com.longjiang.jiangxia.demo1.daoentity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -39,16 +37,19 @@ public class GoodsDayPrice implements Serializable {
     /**
      * 0->删除，1->存活
      */
+    @TableLogic
     private Integer deleteStatus;
 
     /**
      * 删除时间
      */
+    @TableField(fill = FieldFill.UPDATE)
     private Date deleteTime;
 
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**

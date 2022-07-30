@@ -1,6 +1,7 @@
-package com.longjiang.jiangxia.demo1.config;
+package com.longjiang.jiangxia.demo1.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.longjiang.jiangxia.demo1.enumset.ResponseEnum;
 
 /**
  * @author gavin

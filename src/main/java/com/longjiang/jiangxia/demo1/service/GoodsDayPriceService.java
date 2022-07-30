@@ -1,6 +1,6 @@
 package com.longjiang.jiangxia.demo1.service;
 
-import com.longjiang.jiangxia.demo1.GoodsDayPrice;
+import com.longjiang.jiangxia.demo1.daoentity.GoodsDayPrice;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

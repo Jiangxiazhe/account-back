@@ -8,15 +8,30 @@ group = 'com.longjiang.jiangxia'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+
 repositories {
+    //指定阿里云镜像
+    maven {
+        url 'https://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    mavenLocal()
     mavenCentral()
+
 }
 
 dependencies {
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    // implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'in.hocg.boot:mybatis-plus-spring-boot-starter:1.0.45'
+    implementation 'com.baomidou:mybatis-plus:3.5.2'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.projectlombok:lombok:1.18.24'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'com.alibaba:druid:1.2.11'
+
 }
 
 tasks.named('test') {
