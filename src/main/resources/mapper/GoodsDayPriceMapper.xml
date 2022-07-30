@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longjiang.jiangxia.demo1.mapper.GoodsDayPriceMapper">
+
+    <resultMap id="BaseResultMap" type="com.longjiang.jiangxia.demo1.GoodsDayPrice">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="goodId" column="good_id" jdbcType="INTEGER"/>
+            <result property="date" column="date" jdbcType="DATE"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="deleteStatus" column="delete_status" jdbcType="INTEGER"/>
+            <result property="deleteTime" column="delete_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="creator" column="creator" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,good_id,date,
+        price,delete_status,delete_time,
+        create_time,creator
+    </sql>
+</mapper>

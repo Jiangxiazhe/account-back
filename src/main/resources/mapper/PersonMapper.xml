@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longjiang.jiangxia.demo1.mapper.PersonMapper">
+
+    <resultMap id="BaseResultMap" type="com.longjiang.jiangxia.demo1.Person">
+            <id property="id" column="Id" jdbcType="INTEGER"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="contact" column="contact" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="CHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="comment" column="comment" jdbcType="VARCHAR"/>
+            <result property="deleteStatus" column="delete_status" jdbcType="INTEGER"/>
+            <result property="deleteTime" column="delete_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        Id,type,contact,
+        name,address,comment,
+        delete_status,delete_time,update_time,
+        create_time
+    </sql>
+</mapper>
