@@ -1,10 +1,12 @@
 package com.longjiang.jiangxia.demo1.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.longjiang.jiangxia.demo1.daoentity.*;
-import com.longjiang.jiangxia.demo1.entity.Response;
+import com.longjiang.jiangxia.demo1.entity.common.IDListTO;
+import com.longjiang.jiangxia.demo1.entity.common.PageWithAttach;
+import com.longjiang.jiangxia.demo1.entity.common.Response;
 import com.longjiang.jiangxia.demo1.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,116 +19,62 @@ import java.util.List;
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
-    private GoodsListServiceImpl goodsListService;
-    @Autowired
-    private SupplierMapper supplierMapper;
 
-    private SupplierGoodsServiceImpl supplierGoodsService;
-    private CustomerGoodsServiceImpl customerGoodsService;
+    private GoodsServiceImpl goodsService;
 
     @Autowired
     public void Inject(
-            GoodsListServiceImpl goodsListService,
-            SupplierMapper supplierMapper,
-            SupplierGoodsServiceImpl supplierGoodsService,
-            CustomerGoodsServiceImpl customerGoodsService
+            GoodsServiceImpl goodsService
     ){
-        this.goodsListService=goodsListService;
-        this.supplierMapper=supplierMapper;
-        this.customerGoodsService=customerGoodsService;
-        this.supplierGoodsService=supplierGoodsService;
+        this.goodsService=goodsService;
+
     }
 
 
-    @PostMapping(value = "/supplierGoods")
-    public Response<String> addSupplierGoods(@RequestBody SupplierGoods supplierGoods) {
-        System.out.println(supplierGoods.toString());
-        QueryWrapper<Supplier> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "name").eq("name", supplierGoods.getPersonName());
-        List<Supplier> supplierList = supplierMapper.selectList(queryWrapper);
-        if (supplierList.size() == 1) {
-            supplierGoods.setFkSupplier(supplierList.get(0).getId());
-            supplierGoodsService.save(supplierGoods);
-            return Response.rspData("showUser");
-        } else {
-            return Response.rspData("Error");
+    @PostMapping(value = "/add")
+    public Response<String> addGoods(@RequestBody Goods goods) {
+
+        if(goodsService.save(goods)){
+            return Response.success("添加商品成功");
+        }else{
+            return Response.fail("添加商品失败");
         }
     }
 
-    @PostMapping(value = "/goodsList")
-    public Response<String> addGoods(@RequestBody GoodsList goodsList){
-        System.out.println(goodsList.toString());
-        goodsListService.save(goodsList);
-        return Response.rspData("showUser");
-    }
-
-    @PostMapping(value = "/customerGoods")
-    public Response<String> addCustomerGoods(@RequestBody CustomerGoods customerGoods) {
-        System.out.println(customerGoods.toString());
-        QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "name").eq("name", customerGoods.getPersonName());
-        List<Customer> customerList = customerMapper.selectList(queryWrapper);
-        if (customerList.size() == 1) {
-            customerGoods.setFkCustomer(customerList.get(0).getId());
-            customerGoodsService.save(customerGoods);
-            return Response.rspData("showUser");
-        } else {
-            return Response.rspData("Error");
+    @PostMapping(value = "/delete")
+    public Response<String> deleteGoods(@RequestBody IDListTO idListTO){
+        if(goodsService.removeBatchByIds(idListTO.getId())){
+            return Response.success("删除商品成功");
+        }else{
+            return Response.fail("删除商品失败");
         }
     }
 
-    @PostMapping(value = "/customerGoodsList")
-    public Response<Page<CustomerGoods>> ReturnGoodsList(@RequestBody CustomerGoods customerGoods){
-        Page<CustomerGoods> ipage = new Page<>(customerGoods.pageCurrent,customerGoods.pageSize);
-        QueryWrapper<CustomerGoods> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "date", "good_name", "price", "amount")
-                .between("date", customerGoods.dateRange.get(0),customerGoods.dateRange.get(1))
-                .eq("good_name",customerGoods.getGoodName())
-                .eq("person_name", customerGoods.getPersonName());
-        Page<CustomerGoods> customerGoodsList = customerGoodsService.selectPage(ipage,queryWrapper);
-        return Response.rspData(customerGoodsList);
+    @PostMapping(value = "/modify")
+    public Response<String> updateGoods(@RequestBody Goods good) {
+        UpdateWrapper<Goods> updateWrapper=new UpdateWrapper<>();
+        updateWrapper.eq("id",good.getId());
+        if(goodsService.update(good,updateWrapper)){
+            return Response.success("更新商品成功");
+        }else{
+            return Response.fail("更新商品失败");
+        }
     }
 
-    @PostMapping(value = "/supplierGoodsList")
-    public Response<Page<SupplierGoods>> ReturnGoodsList(@RequestBody SupplierGoods supplierGoods){
-        Page<SupplierGoods> ipage = new Page<>(supplierGoods.pageCurrent,supplierGoods.pageSize);
-        QueryWrapper<SupplierGoods> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "date", "good_name", "price", "amount")
-                .between("date", supplierGoods.dateRange.get(0),supplierGoods.dateRange.get(1))
-                .eq("good_name",supplierGoods.getGoodName())
-                .eq("person_name", supplierGoods.getPersonName());
-        Page<SupplierGoods> supplierGoodsList = supplierGoodsMapper.selectPage(ipage,queryWrapper);
-        return Response.rspData(supplierGoodsList);
-    }
-
-    @PostMapping(value = "/deteleSuppierGoodItem")
-    public Response<String> deleteSupplierGoods(@RequestBody long id) {
-        System.out.println(id);
-        supplierGoodsService.removeById(id);
-        return Response.rspData("showUser");
-    }
-
-    @PostMapping(value = "/deteleCustomerGoodItem")
-    public Response<String> deleteCustomerGoods(@RequestBody long id) {
-        System.out.println(id);
-        customerGoodsService.removeById(id);
-        return Response.rspData("showUser");
-    }
-
-    @PostMapping(value = "/goodManage")
-    public Response<Page<GoodsList>> ReturnGoodsListList(@RequestBody GoodsList goodsList){
-        Page<GoodsList> goodsListList = goodsListService.ReturnGoodsListList(goodsList);
-        return Response.rspData(goodsListList);
+    @PostMapping(value = "/list/page")
+    public Response<Page<Goods>> GetGoodsList(@RequestBody PageWithAttach<String> pageWithAttach){
+        Page<Goods> page = new Page<>(pageWithAttach.getCurrent(),pageWithAttach.getSize());
+        goodsService.page(page);
+        return Response.rspData(page);
     }
 
 
-    @PostMapping(value = "/goodsName")
-    public Response<List<GoodsList>> ReturnGoods(){
-        QueryWrapper<GoodsList> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "name");
-        List<GoodsList> goodsListList = goodsListMapper.selectList(queryWrapper);
-        return Response.rspData(goodsListList);
+    @PostMapping(value = "/list/all")
+    public Response<List<Goods>> GetAllPersonList(@RequestBody PageWithAttach<Integer> pageWithAttach){
+        List<Goods> personList= goodsService.list();
+        return Response.rspData(personList);
     }
+
 
 
 }

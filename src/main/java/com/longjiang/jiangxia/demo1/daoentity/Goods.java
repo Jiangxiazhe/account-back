@@ -3,6 +3,11 @@ package com.longjiang.jiangxia.demo1.daoentity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -11,34 +16,111 @@ import lombok.Data;
  */
 @TableName(value ="goods")
 @Data
+@ApiModel
 public class Goods implements Serializable {
     /**
      * 
      */
+//    @JsonIgnore
     private Integer id;
 
     /**
      * 
      */
+    @ApiModelProperty("商品名")
     private String name;
 
     /**
      * 单位类型：1->市斤，2->公斤，3->件
      */
+    @ApiModelProperty("单位类型：1->市斤，2->公斤，3->件")
     private Integer unitType;
+
+    /**
+     * 预期买入价格
+     */
+    @ApiModelProperty("预期价格")
+    private BigDecimal buyPrice;
+
+    /**
+     * 预期卖出价格
+     */
+    @ApiModelProperty("预期卖出价格")
+    private BigDecimal sellPrice;
 
     /**
      * example:"市斤","公斤","件"
      */
+    @ApiModelProperty("单位描述:\"市斤\",\"公斤\",\"件\"")
     private String unitDesc;
 
     /**
      * 预留值
      */
+    @JsonIgnore
     private Integer type;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getUnitType() {
+        return unitType;
+    }
+
+    public void setUnitType(Integer unitType) {
+        this.unitType = unitType;
+    }
+
+    public String getUnitDesc() {
+        return unitDesc;
+    }
+
+    public void setUnitDesc(String unitDesc) {
+        this.unitDesc = unitDesc;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+
+
+
+    public BigDecimal getBuyPrice() {
+        return buyPrice;
+    }
+
+    public void setBuyPrice(BigDecimal buyPrice) {
+        this.buyPrice = buyPrice;
+    }
+
+    public BigDecimal getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(BigDecimal sellPrice) {
+        this.sellPrice = sellPrice;
+    }
 
     @Override
     public boolean equals(Object that) {

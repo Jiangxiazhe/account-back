@@ -1,6 +1,6 @@
 package com.longjiang.jiangxia.demo1.service;
 
-import com.longjiang.jiangxia.demo1.daoentity.Goods;
+import com.longjiang.jiangxia.demo1.daoentity.DealRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author author
+ * @author hang
  * @since 2022-07-30
  */
-public interface IGoodsService extends IService<Goods> {
+public interface IDealRecordService extends IService<DealRecord> {
 
 }

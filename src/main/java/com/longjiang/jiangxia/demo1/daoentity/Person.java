@@ -1,11 +1,12 @@
 package com.longjiang.jiangxia.demo1.daoentity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -19,55 +20,149 @@ public class Person implements Serializable {
      * 
      */
     @TableId(type = IdType.AUTO)
+//    @JsonIgnore
     private Integer id;
 
     /**
      * 类型：0->供应商,1->客户
      */
+    @ApiModelProperty("人员类型：0->供应商,1->客户")
     private Integer type;
 
     /**
      * 联系方式
      */
+    @ApiModelProperty("联系方式，example:132022xxxxx")
     private String contact;
 
     /**
      * 姓名
      */
+    @ApiModelProperty("姓名")
     private String name;
 
     /**
      * 地址
      */
+    @ApiModelProperty("地址")
     private String address;
 
     /**
      * 描述，备注
      */
+    @ApiModelProperty("备注")
     private String comment;
 
     /**
      * 0->删除，1->存活
      */
+    @TableLogic
+    @JsonIgnore
     private Integer deleteStatus;
 
     /**
      * 删除时间
      */
+//    @TableField(fill = FieldFill.UPDATE)
+    @JsonIgnore
     private Date deleteTime;
 
     /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.UPDATE)
+    @JsonIgnore
     private Date updateTime;
 
     /**
      * 
      */
+    @JsonIgnore
     private Date createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Integer getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(Integer deleteStatus) {
+        this.deleteStatus = deleteStatus;
+    }
+
+    public Date getDeleteTime() {
+        return deleteTime;
+    }
+
+    public void setDeleteTime(Date deleteTime) {
+        this.deleteTime = deleteTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     @Override
     public boolean equals(Object that) {

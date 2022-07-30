@@ -1,26 +1,29 @@
-package com.longjiang.jiangxia.demo1.entity;
+package com.longjiang.jiangxia.demo1.entity.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.longjiang.jiangxia.demo1.enumset.ResponseEnum;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author gavin
- * @title 响应实体类
  * @param <T>
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@ApiModel
 public class Response<T> {
-
+    @ApiModelProperty("错误代码")
     private String code;
 
+    @ApiModelProperty("错误消息")
     private String msg;
 
+    @ApiModelProperty("实际数据")
     private T data;
 
 
     /**
-     * @title 成功消息
-     * @param ResponseEnum
+     * 成功消息
      * @return
      */
     public static <T> Response<T> success() {
@@ -28,8 +31,30 @@ public class Response<T> {
     }
 
     /**
+     * @title 成功消息
+     * @return
+     */
+    public static <T> Response<T> success(String msg) {
+        Response<T> responseData = new Response<T>();
+        responseData.setCode(ResponseEnum.SUCCESS.getCode());
+        responseData.setMsg(msg);
+        return responseData;
+    }
+
+    /**
      * @title 失败消息
-     * @param ResponseEnum
+     * @return
+     */
+    public static <T> Response<T> fail(String msg) {
+        Response<T> responseData = new Response<T>();
+        responseData.setCode(ResponseEnum.OPERATION_FAILED.getCode());
+        responseData.setMsg(msg);
+        return responseData;
+    }
+
+
+    /**
+     * @title 失败消息
      * @return
      */
     public static <T> Response<T> fail() {
@@ -38,7 +63,7 @@ public class Response<T> {
 
     /**
      * @title 自定义消息
-     * @param ResponseEnum
+     * @param responseEnum
      * @return
      */
     public static <T> Response<T> rspMsg(ResponseEnum responseEnum) {
@@ -50,8 +75,8 @@ public class Response<T> {
 
     /**
      * @title 自定义消息
-     * @param errcode
-     * @param errmsg
+     * @param code
+     * @param msg
      * @return
      */
     public static <T> Response<T> rspMsg(String code , String msg) {
