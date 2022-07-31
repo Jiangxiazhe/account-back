@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/v1/person")
 public class PersonController {
 
     private PersonServiceImpl personService;
@@ -78,10 +78,11 @@ public class PersonController {
 
 
     @PostMapping(value = "/list/all")
+    @ApiOperation(value = "attachment为任务类型:0->供应商,1->用户")
     public Response<List<Person>> GetAllPersonList(@RequestBody PageWithAttach<Integer> pageWithAttach){
         QueryWrapper<Person> wrapper = new QueryWrapper<>();
 
-//        wrapper.select() .groupBy("type",pageWithAttach.getAttachment());
+        wrapper.eq("type",pageWithAttach.getAttachment());
         List<Person> personList= personService.list(wrapper);
         return Response.rspData(personList);
     }

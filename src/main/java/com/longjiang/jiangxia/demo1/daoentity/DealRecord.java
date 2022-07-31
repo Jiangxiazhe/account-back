@@ -24,34 +24,34 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="DealRecord对象", description="")
+@ApiModel(value="DealRecord对象", description="DealRecord对象")
 public class DealRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    protected Integer id;
 
     @ApiModelProperty(value = "日期")
-    private LocalDate date;
+    protected LocalDate date;
 
     @ApiModelProperty(value = "商品Id")
-    private Integer goodId;
+    protected Integer goodId;
 
     @ApiModelProperty(value = "商品名")
-    private String goodName;
+    protected String goodName;
 
     @ApiModelProperty(value = "类型：0->buy,1->sell")
-    private Integer type;
+    protected Integer type;
 
     @ApiModelProperty(value = "价格")
-    private BigDecimal price;
+    protected BigDecimal price;
 
     @ApiModelProperty(value = "数量")
-    private BigDecimal amount;
+    protected BigDecimal quantity;
 
     @ApiModelProperty(value = "任务Id")
-    private Integer personId;
+    protected Integer personId;
 
 
     public Integer getId() {
@@ -102,12 +102,12 @@ public class DealRecord implements Serializable {
         this.price = price;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
     }
 
     public Integer getPersonId() {

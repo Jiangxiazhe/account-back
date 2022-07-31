@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/goods")
+@RequestMapping("/v1/goods")
 public class GoodsController {
 
     private GoodsServiceImpl goodsService;
@@ -60,6 +60,13 @@ public class GoodsController {
             return Response.fail("更新商品失败");
         }
     }
+
+//    @PostMapping(value = "/one")
+//    public Response<Page<Goods>> GetGoodsList(@RequestBody PageWithAttach<String> pageWithAttach){
+//        Page<Goods> page = new Page<>(pageWithAttach.getCurrent(),pageWithAttach.getSize());
+//        goodsService.page(page);
+//        return Response.rspData(page);
+//    }
 
     @PostMapping(value = "/list/page")
     public Response<Page<Goods>> GetGoodsList(@RequestBody PageWithAttach<String> pageWithAttach){

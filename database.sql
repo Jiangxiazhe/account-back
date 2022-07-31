@@ -68,7 +68,7 @@ create table if not exists  deal_record
     type        int not null comment '类型：0->supplier,1->customer' ,
     buy_price       decimal(10,2) default 0 not null comment '商品预期买入价格' ,
     sell_price       decimal(10,2) default 0 not null comment '商品预期卖出价格' ,
-    amount      decimal(10,2) default 0 not null comment '商品名称' ,
+    quantity      decimal(10,2) default 0 not null comment '商品数量' ,
     person_id   int           not null,
 
     constraint deal_record_id_uindex
